@@ -22,8 +22,7 @@
     "doc": "doctoc docs --title='## Summary'",
     "commit": "git-cz",
     "release": "release-it --patch",
-    "lib:build": "yarn prebuild && tsc -p tsconfig.build.json && mv dist/libs/base/src/* dist && rm dist/libs -r",
-    "lib:test": "jest libs/base --coverage"
+    "lib:build": "yarn prebuild && tsc -p tsconfig.build.json && mv dist/libs/base/src/* dist && rm dist/libs -r"
   },
   "dependencies": {},
   "devDependencies": {
