@@ -24,7 +24,9 @@
     "release": "release-it --patch",
     "lib:build": "yarn prebuild && tsc -p tsconfig.build.json && mv dist/libs/base/src/* dist && rm dist/libs -r"
   },
-  "dependencies": {},
+  "dependencies": {
+    "moment-timezone": "^0.5.31"
+  },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
     "@nestjs/common": "^7.0.0",
@@ -50,7 +52,6 @@
     "graphql": "^15.3.0",
     "husky": "^4.3.0",
     "jest": "26.0.1",
-    "moment-timezone": "^0.5.31",
     "mongoose": "^5.10.7",
     "prettier": "^1.19.1",
     "reflect-metadata": "^0.1.13",
