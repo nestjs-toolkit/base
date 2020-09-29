@@ -12,12 +12,6 @@
     "baseUrl": "./",
     "incremental": true,
     "paths": {
-      "@nestjs-toolkit/winston-logger": [
-        "libs/logger/src"
-      ],
-      "@nestjs-toolkit/winston-logger/*": [
-        "libs/logger/src/*"
-      ],
       "@nestjs-toolkit/base": [
         "libs/base/src"
       ],
