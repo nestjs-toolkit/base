@@ -30,6 +30,7 @@
     "@nestjs/cli": "^7.0.0",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
+    "@nestjs/graphql": "^7.7.0",
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",
@@ -50,6 +51,8 @@
     "graphql": "^15.3.0",
     "husky": "^4.3.0",
     "jest": "26.0.1",
+    "moment-timezone": "^0.5.31",
+    "mongoose": "^5.10.7",
     "prettier": "^1.19.1",
     "reflect-metadata": "^0.1.13",
     "release-it": "^14.0.2",
@@ -80,8 +83,6 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "@nestjs-toolkit/winston-logger/(.*)": "<rootDir>/libs/logger/src/$1",
-      "@nestjs-toolkit/winston-logger": "<rootDir>/libs/logger/src",
       "@nestjs-toolkit/base/(.*)": "<rootDir>/libs/base/src/$1",
       "@nestjs-toolkit/base": "<rootDir>/libs/base/src"
     }
