@@ -21,7 +21,7 @@ export abstract class AbstractRepository<
     return Object.assign({}, initial);
   }
 
-  protected async upsert(
+  async upsert(
     conditions: FilterQuery<TModel>,
     data: UpdateQuery<TModel>,
   ): Promise<ModelWithOld<TModel>> {
@@ -45,8 +45,16 @@ export abstract class AbstractRepository<
       };
     }
 
+    const model = new this.model(data);
+    const dateTime = new Date(model._id.getTimestamp());
+
+    model.set({
+      createdAt: dateTime,
+      updatedAt: dateTime,
+    });
+
     return {
-      model: new this.model(data),
+      model,
       old: {},
       isNew: true,
     };

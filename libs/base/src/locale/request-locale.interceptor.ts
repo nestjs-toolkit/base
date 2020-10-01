@@ -11,7 +11,7 @@ import { RequestLocale } from './request-locale';
 @Injectable()
 export class RequestLocaleInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const headers = ExtractContext.getRequest(context).headers;
+    const headers = ExtractContext.getRequest(context)?.headers || {};
     const locale = new RequestLocale();
 
     if ('time-zone' in headers) {
