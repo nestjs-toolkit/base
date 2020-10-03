@@ -1,7 +1,7 @@
 import { Document, FilterQuery, Model, UpdateQuery } from 'mongoose';
 import { MaybeModelWithOld, ModelWithOld } from './types';
 import { uniqueIds } from '../helpers';
-import { ModelNotFoundException } from '../exceptions/ModelNotFoundException';
+import { ModelNotFoundException } from '../exceptions';
 
 export abstract class AbstractRepository<
   TModel extends Document,
@@ -86,13 +86,19 @@ export abstract class AbstractRepository<
     };
   }
 
-  async find(_id: any): Promise<TModel | null> {
+  async find(_id: any, population?: any): Promise<TModel | null> {
     const conditions = this.createQueryObject({ _id });
-    return this.model.findOne(conditions).exec();
+    const query = this.model.findOne(conditions);
+
+    if (population) {
+      return query.populate(population).exec();
+    }
+
+    return query.exec();
   }
 
-  async findOrFail(_id: any): Promise<TModel> {
-    const model = await this.find(_id);
+  async findOrFail(_id: any, population?: any): Promise<TModel> {
+    const model = await this.find(_id, population);
 
     if (!model) {
       throw new ModelNotFoundException();
@@ -101,19 +107,22 @@ export abstract class AbstractRepository<
     return model;
   }
 
-  async findByIds(ids: ReadonlyArray<any>) {
+  async findByIds(ids: ReadonlyArray<any>, population?: any) {
     const conditions = this.createQueryObject({ _id: { $in: uniqueIds(ids) } });
 
-    return this.model
-      .find(conditions)
-      .limit(ids.length)
-      .exec();
+    const query = this.model.find(conditions).limit(ids.length);
+
+    if (population) {
+      query.populate(population);
+    }
+
+    return query.exec();
   }
 
-  async loadMany(ids: ReadonlyArray<any>) {
-    const categories = await this.findByIds(ids);
+  async loadMany(ids: ReadonlyArray<any>, population?: any) {
+    const models = await this.findByIds(ids, population);
 
-    return ids.map(id => categories.find(category => category._id.equals(id)));
+    return ids.map(id => models.find(model => model._id.equals(id)));
   }
 
   async updateByID(
