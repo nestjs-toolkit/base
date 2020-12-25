@@ -24,14 +24,12 @@
     "release": "release-it --patch",
     "lib:build": "yarn prebuild && tsc -p tsconfig.build.json && mv dist/libs/base/src/* dist && rm dist/libs -r"
   },
-  "dependencies": {
-    "moment-timezone": "^0.5.31"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
-    "@nestjs/graphql": "^7.7.0",
+    "@nestjs/graphql": "^7.9.1",
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",
@@ -49,9 +47,10 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
     "fast-safe-stringify": "^2.0.7",
-    "graphql": "^15.3.0",
+    "graphql": "^15.4.0",
     "husky": "^4.3.0",
     "jest": "26.0.1",
+    "moment-timezone": "^0.5.32",
     "mongoose": "^5.10.7",
     "prettier": "^1.19.1",
     "reflect-metadata": "^0.1.13",

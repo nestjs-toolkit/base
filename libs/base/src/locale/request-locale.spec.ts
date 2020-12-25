@@ -1,4 +1,4 @@
-import { RequestLocale } from '@nestjs-toolkit/base';
+import { RequestLocale } from '@nestjs-toolkit/base/locale/request-locale';
 
 describe('RequestLocale', () => {
   let request: RequestLocale;
