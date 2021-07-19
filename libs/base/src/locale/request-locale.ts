@@ -47,7 +47,7 @@ export class RequestLocale {
   setLang(lang: string): void {
     if (!lang) return;
 
-    const languages = ['es', 'en', 'pt_br'];
+    const languages = ['es', 'en', 'pt', 'pt_br'];
     const str = lang ? lang.toLowerCase().replace('-', '_') : null;
 
     if (languages.includes(str)) {
