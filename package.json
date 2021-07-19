@@ -1,6 +1,6 @@
 {
   "name": "@nestjs-toolkit/base",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "core helpers",
   "author": "Valmir Barbosa",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "doc": "doctoc docs --title='## Summary'",
     "commit": "git-cz",
     "release": "release-it --patch",
-    "lib:build": "yarn prebuild && tsc -p tsconfig.build.json && mv dist/libs/base/src/* dist && rm dist/libs -r"
+    "lib:build": "yarn prebuild && tsc -p tsconfig.build.json && mv dist/libs/base/src/* dist && rm -r dist/libs"
   },
   "dependencies": {},
   "devDependencies": {
