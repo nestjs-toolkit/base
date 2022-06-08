@@ -9,9 +9,9 @@ export abstract class AbstractRepository<
 > {
   protected constructor(protected readonly model: Model<TModel>) {}
 
-  abstract async delete(model: TModel, req?: TRequest): Promise<boolean>;
+  abstract delete(model: TModel, req?: TRequest): Promise<boolean>;
 
-  abstract async update(
+  abstract update(
     model: TModel,
     dto: any,
     req?: TRequest,
@@ -86,7 +86,8 @@ export abstract class AbstractRepository<
     };
   }
 
-  async find(_id: any, population?: any): Promise<TModel | null> {
+  // todo fix type
+  async find(_id: any, population?: any): Promise<any> {
     const conditions = this.createQueryObject({ _id });
     const query = this.model.findOne(conditions);
 
