@@ -23,6 +23,9 @@
     "release": "release-it --patch",
     "lib:build": "yarn prebuild && tsc -p tsconfig.build.json && cp package.json dist/libs"
   },
+  "peerDependencies": {
+    "moment-timezone": "^0.5.34"
+  },
   "devDependencies": {
     "@nestjs/cli": "^8.2.6",
     "@nestjs/common": "^8.4.6",
@@ -32,33 +35,27 @@
     "@nestjs/schematics": "^8.0.11",
     "@nestjs/testing": "^8.4.6",
     "@types/express": "^4.17.13",
-    "@types/jest": "28.1.1",
-    "@types/lodash": "^4.14.182",
-    "@types/node": "^13.13.52",
+    "@types/jest": "27.5.2",
+    "@types/node": "^16.11.39",
     "@types/supertest": "^2.0.12",
-    "@typescript-eslint/eslint-plugin": "5.27.1",
-    "@typescript-eslint/parser": "5.27.1",
-    "apollo-server-types": "^3.6.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "doctoc": "^2.2.0",
-    "eslint": "8.17.0",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "fast-safe-stringify": "^2.1.1",
-    "graphql": "^16.5.0",
-    "jest": "28.1.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
     "moment-timezone": "^0.5.34",
-    "mongoose": "^6.3.5",
+    "mongoose": "^6.3.6",
     "prettier": "^2.6.2",
     "reflect-metadata": "^0.1.13",
-    "release-it": "^15.0.0",
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.5",
+    "source-map-support": "^0.5.21",
     "supertest": "^6.2.3",
-    "ts-jest": "28.0.4",
+    "ts-jest": "^27.1.5",
     "ts-loader": "^9.3.0",
     "ts-node": "^10.8.1",
-    "tsconfig-paths": "^4.0.0",
+    "tsconfig-paths": "^3.14.1",
     "typescript": "^4.7.3"
   },
   "jest": {
@@ -68,10 +65,13 @@
       "ts"
     ],
     "rootDir": ".",
-    "testRegex": ".spec.ts$",
+    "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "roots": [
@@ -79,8 +79,7 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "@nestjs-toolkit/base/(.*)": "<rootDir>/libs/base/src/$1",
-      "@nestjs-toolkit/base": "<rootDir>/libs/base/src"
+      "^@nestjs-toolkit/base(|/.*)$": "<rootDir>/libs/base/src/$1"
     }
   },
   "publishConfig": {

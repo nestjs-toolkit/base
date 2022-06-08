@@ -12,6 +12,11 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
     "paths": {
       "@nestjs-toolkit/base": [
         "libs/base/src"
@@ -20,9 +25,5 @@
         "libs/base/src/*"
       ]
     }
-  },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  }
 }

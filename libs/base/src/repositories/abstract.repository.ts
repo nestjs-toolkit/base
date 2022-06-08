@@ -5,7 +5,7 @@ import { ModelNotFoundException } from '../exceptions';
 
 export abstract class AbstractRepository<
   TModel extends Document,
-  TRequest = any
+  TRequest = any,
 > {
   protected constructor(protected readonly model: Model<TModel>) {}
 
@@ -123,7 +123,7 @@ export abstract class AbstractRepository<
   async loadMany(ids: ReadonlyArray<any>, population?: any) {
     const models = await this.findByIds(ids, population);
 
-    return ids.map(id => models.find(model => model._id.equals(id)));
+    return ids.map((id) => models.find((model) => model._id.equals(id)));
   }
 
   async updateByID(
@@ -146,7 +146,7 @@ export abstract class AbstractRepository<
       throw new ModelNotFoundException();
     }
 
-    return Promise.all(models.map(model => this.update(model, dto, req)));
+    return Promise.all(models.map((model) => this.update(model, dto, req)));
   }
 
   async deleteByID(_id: any, req?: TRequest): Promise<boolean> {
@@ -161,6 +161,6 @@ export abstract class AbstractRepository<
       throw new ModelNotFoundException();
     }
 
-    return Promise.all(models.map(model => this.delete(model, req)));
+    return Promise.all(models.map((model) => this.delete(model, req)));
   }
 }
