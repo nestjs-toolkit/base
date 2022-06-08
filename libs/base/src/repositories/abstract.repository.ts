@@ -1,7 +1,7 @@
 import { Document, FilterQuery, Model, UpdateQuery } from 'mongoose';
-import { MaybeModelWithOld, ModelWithOld } from './types';
-import { uniqueIds } from '../helpers';
+import { uniqueIds } from '../utils';
 import { ModelNotFoundException } from '../exceptions';
+import { MaybeModelWithOld, ModelWithOld } from './types';
 
 export abstract class AbstractRepository<
   TModel extends Document,
