@@ -1,7 +1,6 @@
 import { Moment } from 'moment';
 import 'moment-timezone';
-import * as moment from 'moment';
-// import * as moment from 'moment-timezone';
+import moment from 'moment-timezone';
 
 const trans = {
   calendar_same_day: 'today',
