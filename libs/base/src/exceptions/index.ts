@@ -1,5 +1,5 @@
 export { BadRequestException } from './BadRequestException';
-export { FailedException } from './FailedException';
+export { InternalServerErrorException } from './InternalServerErrorException';
 export { ModelNotFoundException } from './ModelNotFoundException';
 export { NotFoundException } from './NotFoundException';
 export { UnauthorizedException } from './UnauthorizedException';

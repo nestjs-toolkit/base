@@ -1,17 +1,17 @@
 import { Document, FilterQuery, Model, UpdateQuery } from 'mongoose';
-import { MaybeModelWithOld, ModelWithOld } from './types';
-import { uniqueIds } from '../helpers';
+import { uniqueIds } from '../utils';
 import { ModelNotFoundException } from '../exceptions';
+import { MaybeModelWithOld, ModelWithOld } from './types';
 
 export abstract class AbstractRepository<
   TModel extends Document,
-  TRequest = any
+  TRequest = any,
 > {
   protected constructor(protected readonly model: Model<TModel>) {}
 
-  abstract async delete(model: TModel, req?: TRequest): Promise<boolean>;
+  abstract delete(model: TModel, req?: TRequest): Promise<boolean>;
 
-  abstract async update(
+  abstract update(
     model: TModel,
     dto: any,
     req?: TRequest,
@@ -86,7 +86,8 @@ export abstract class AbstractRepository<
     };
   }
 
-  async find(_id: any, population?: any): Promise<TModel | null> {
+  // todo fix type
+  async find(_id: any, population?: any): Promise<any> {
     const conditions = this.createQueryObject({ _id });
     const query = this.model.findOne(conditions);
 
@@ -122,7 +123,7 @@ export abstract class AbstractRepository<
   async loadMany(ids: ReadonlyArray<any>, population?: any) {
     const models = await this.findByIds(ids, population);
 
-    return ids.map(id => models.find(model => model._id.equals(id)));
+    return ids.map((id) => models.find((model) => model._id.equals(id)));
   }
 
   async updateByID(
@@ -145,7 +146,7 @@ export abstract class AbstractRepository<
       throw new ModelNotFoundException();
     }
 
-    return Promise.all(models.map(model => this.update(model, dto, req)));
+    return Promise.all(models.map((model) => this.update(model, dto, req)));
   }
 
   async deleteByID(_id: any, req?: TRequest): Promise<boolean> {
@@ -160,6 +161,6 @@ export abstract class AbstractRepository<
       throw new ModelNotFoundException();
     }
 
-    return Promise.all(models.map(model => this.delete(model, req)));
+    return Promise.all(models.map((model) => this.delete(model, req)));
   }
 }
