@@ -1,17 +1,14 @@
-import {
-  CallHandler,
-  ExecutionContext,
-  Injectable,
-  NestInterceptor,
-} from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { ExtractContext } from '../utils';
+import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';
 import { RequestLocale } from './request-locale';
 
-@Injectable()
-export class RequestLocaleInterceptor implements NestInterceptor {
+export abstract class AbstractLocaleInterceptor implements NestInterceptor {
+  protected abstract getContext(context): any;
+
+  protected abstract getHeaders(context): any;
+
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const headers = ExtractContext.getRequest(context)?.headers || {};
+    const headers = this.getHeaders(context);
     const locale = new RequestLocale();
 
     if ('time-zone' in headers) {
@@ -24,7 +21,7 @@ export class RequestLocaleInterceptor implements NestInterceptor {
       locale.setLang(headers['accept-language']); // Accept-Language
     }
 
-    ExtractContext.getContext(context).requestLocale = locale;
+    this.getContext(context).requestLocale = locale;
 
     return next.handle();
   }

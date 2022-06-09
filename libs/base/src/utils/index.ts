@@ -1,4 +1,3 @@
-export * from './extract-context';
 export * from './array';
 export * from './enums';
 export * from './helpers';
