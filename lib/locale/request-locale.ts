@@ -1,27 +1,10 @@
 import { Moment } from 'moment';
-import * as moment from 'moment-timezone';
-
-const trans = {
-  calendar_same_day: 'today',
-  calendar_next_day: 'tomorrow',
-  calendar_last_day: 'yesterday',
-  calendar_last_week: 'last',
-};
-
-class Antl {
-  formatMessage(key) {
-    return trans[key] || key;
-  }
-}
+import moment from 'moment-timezone';
 
 export class RequestLocale {
-  private lag: string;
-  private timeZone: string;
+  private lag = 'en';
+  private timeZone = 'UTC';
   private offset: string;
-
-  get antl(): Antl {
-    return new Antl();
-  }
 
   getMoment(date: any): Moment {
     return moment(date).locale(this.getLang());
@@ -35,11 +18,7 @@ export class RequestLocale {
   }
 
   getLang(): string {
-    return this.lag || this.getLangFallback();
-  }
-
-  getLangFallback(): string {
-    return 'en';
+    return this.lag;
   }
 
   setLang(lang: string): void {
@@ -63,11 +42,6 @@ export class RequestLocale {
 
   toMoment(date: any): Moment {
     return this.getMoment(date).utc();
-    // if (typeof date === 'string') {
-    //   return moment(date).utc();
-    // }
-    //
-    // return moment.isMoment(date) ? date : moment.utc(date);
   }
 
   toMomentTimezone(date: any): Moment {
@@ -87,6 +61,10 @@ export class RequestLocale {
       return null;
     }
 
-    return trans[this.getLang()] || trans[this.getLangFallback()];
+    return trans[this.getLang()];
+  }
+
+  fromTimezoneToDateUtc(date: Date | string): Date {
+    return moment(date).tz(this.timeZone, true).utc().toDate();
   }
 }

@@ -17,6 +17,14 @@ export abstract class BaseJoiValidationPipe<T = any, R = any>
     return {};
   }
 
+  errorCode(): string {
+    return 'validation_failed';
+  }
+
+  errorMessage(): string {
+    return 'Falha de validação dos dados';
+  }
+
   protected extractData(data: T) {
     return data;
   }
@@ -30,8 +38,8 @@ export abstract class BaseJoiValidationPipe<T = any, R = any>
 
     if (error) {
       throw new ValidateFailedException(
-        'Falha de validação dos dados',
-        'VALIDATION_FAILED',
+        this.errorMessage(),
+        this.errorCode(),
         HttpStatus.BAD_REQUEST,
         buildMessageValidationApollo(error, this.messages(), this.attributes()),
       );

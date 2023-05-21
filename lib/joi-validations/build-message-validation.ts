@@ -1,4 +1,4 @@
-import * as format from 'string-format';
+import format from 'string-format';
 import { ValidationError, ValidationErrorItem } from 'joi';
 import { getObject } from '../utils';
 import { location } from './translate';

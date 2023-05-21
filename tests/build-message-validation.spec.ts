@@ -1,6 +1,8 @@
 import { ValidationError, ValidationErrorItem } from 'joi';
-import { buildMessageValidation } from './build-message-validation';
-import { JoiMessageValidation } from './types';
+import {
+  buildMessageValidation,
+  JoiMessageValidation,
+} from '../lib/joi-validations';
 
 class Validation extends Error implements ValidationError {
   name: 'ValidationError';

@@ -1,0 +1,36 @@
+{
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "rootDir": "../",
+  "testEnvironment": "node",
+  "testRegex": ".spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "maxWorkers": "50%",
+  "maxConcurrency": 1,
+  "coverageDirectory": ".coverage",
+  "collectCoverageFrom": [
+    "./lib/**/*.ts"
+  ],
+  "coveragePathIgnorePatterns": [
+    "node_modules"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 20,
+      "functions": 20,
+      "lines": 20,
+      "statements": 20
+    }
+  },
+  "testPathIgnorePatterns": [
+    "<rootDir>/.tmp/",
+    "<rootDir>/.yarn/"
+  ],
+  "testTimeout": 3000
+}
+
