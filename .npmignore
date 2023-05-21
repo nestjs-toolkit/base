@@ -1,30 +1,5 @@
-#// TODO revisar
-# source
-libs
-tests
-index.ts
-tsconfig.json
-tsconfig.build.json
-.coverage
-
-# misc
-.commitlintrc.json
-.release-it.json
-.eslintignore
-.eslintrc.js
-.prettierignore
-.prettierrc
-
-# ide
-.idea
-.github
-
-# Package files
-.nycrc
-.yarn
-yarn.lock
-package-lock.json
-.yarnrc.yml
-yarn-error.log
-
-nest-cli.json
+*
+!/dist
+!/package.json
+!/README.md
+!/LICENSE
