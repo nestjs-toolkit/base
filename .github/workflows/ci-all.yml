@@ -1,3 +1,4 @@
+#// TODO revisar CI
 name: NestJs Workflow
 
 on: [ pull_request ]
@@ -6,32 +7,29 @@ jobs:
   ci:
     runs-on: ubuntu-latest
 
-    env:
-      NPM_GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+#// TODO remove
+#    env:
+#      NPM_GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup NodeJs
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: '18'
 
       - name: Yarn install
-        run: yarn install
+        run: yarn install --immutable
 
       - name: Lint
         run: yarn lint
 
-      - name: Unit test
-        run: yarn test
-
-      - name: Testing e2e
-        run: yarn test:e2e
+      - name: Test + Coverage
+        run: yarn test:cov
 
       - name: Lib build
-        run: yarn lib:build
-
-
+        run: yarn build
