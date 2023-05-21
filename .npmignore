@@ -1,14 +1,11 @@
+#// TODO revisar
 # source
 libs
-test
-logs
+tests
 index.ts
-package-lock.json
 tsconfig.json
 tsconfig.build.json
-tsconfig.build.tsbuildinfo
-coverage
-src
+.coverage
 
 # misc
 .commitlintrc.json
@@ -22,9 +19,12 @@ src
 .idea
 .github
 
-yarn-error.log
+# Package files
 .nycrc
-nest-cli.json
+.yarn
+yarn.lock
+package-lock.json
+.yarnrc.yml
+yarn-error.log
 
-# DOCKER
-docker-compose.yml
+nest-cli.json
