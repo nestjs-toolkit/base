@@ -9,7 +9,8 @@ export class InternalServerErrorException extends AbstractException {
     code = 'E_INTERNAL_SERVER_ERROR',
     status = HttpStatus.INTERNAL_SERVER_ERROR,
     properties?: Record<string, any>,
+    error?: Error,
   ) {
-    super(message, code, status, properties);
+    super(message, code, status, properties, error);
   }
 }

@@ -6,20 +6,31 @@ export class AbstractException extends HttpException {
    */
   public extensions: Record<string, any>;
 
+  public isCustomException = true;
+
+  get errorCode(): string {
+    return this.extensions.code;
+  }
+
   constructor(
     message: string,
     code: string,
     status: number,
     properties?: Record<string, any>,
+    error?: Error,
   ) {
-    super(message, status);
+    super({ message, code, httpCode: status, ...properties }, status);
 
     // if no name provided, use the default. defineProperty ensures that it stays non-enumerable
     if (!this.name) {
       Object.defineProperty(this, 'name', { value: 'AbstractException' });
     }
 
-    this.extensions = { code, http_code: status, ...properties };
+    this.extensions = { code, httpCode: status, ...properties };
+
+    if (error) {
+      this.setException(error);
+    }
   }
 
   public setValidation(validation: any): this {
@@ -39,5 +50,13 @@ export class AbstractException extends HttpException {
       stack: error.stack,
     };
     return this;
+  }
+
+  toJSON() {
+    return {
+      message: this.message,
+      errorCode: this.errorCode,
+      extensions: this.extensions,
+    };
   }
 }
