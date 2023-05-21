@@ -15,10 +15,14 @@ export abstract class AbstractLocaleInterceptor implements NestInterceptor {
       locale.setTimeZone(headers['time-zone']); // Time-Zone
     } else if ('time-zone-offset' in headers) {
       locale.setTimeZoneOffset(headers['time-zone-offset']); // Time-Zone-Offset
+    } else {
+      locale.setTimeZone(process.env.DEFAULT_TIME_ZONE || 'America/Sao_Paulo'); // Default
     }
 
     if ('accept-language' in headers) {
       locale.setLang(headers['accept-language']); // Accept-Language
+    } else {
+      locale.setLang(process.env.DEFAULT_LANG || 'pt-BR'); // Default
     }
 
     this.getContext(context).requestLocale = locale;

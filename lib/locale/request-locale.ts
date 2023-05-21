@@ -1,10 +1,9 @@
 import { Moment } from 'moment';
 import moment from 'moment-timezone';
 
-// TODO refatorar
 export class RequestLocale {
-  private lag: string;
-  private timeZone = 'UTC'; // TODO use ENV
+  private lag = 'en';
+  private timeZone = 'UTC';
   private offset: string;
 
   getMoment(date: any): Moment {
@@ -19,11 +18,7 @@ export class RequestLocale {
   }
 
   getLang(): string {
-    return this.lag || this.getLangFallback();
-  }
-
-  getLangFallback(): string {
-    return 'en';
+    return this.lag;
   }
 
   setLang(lang: string): void {
@@ -47,11 +42,6 @@ export class RequestLocale {
 
   toMoment(date: any): Moment {
     return this.getMoment(date).utc();
-    // if (typeof date === 'string') {
-    //   return moment(date).utc();
-    // }
-    //
-    // return moment.isMoment(date) ? date : moment.utc(date);
   }
 
   toMomentTimezone(date: any): Moment {
@@ -71,7 +61,7 @@ export class RequestLocale {
       return null;
     }
 
-    return trans[this.getLang()] || trans[this.getLangFallback()];
+    return trans[this.getLang()];
   }
 
   fromTimezoneToDateUtc(date: Date | string): Date {
