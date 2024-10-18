@@ -1,5 +1,4 @@
-import { Moment } from 'moment';
-import moment from 'moment-timezone';
+import moment, { Moment } from 'moment-timezone';
 
 export class RequestLocale {
   private lag = 'en';
