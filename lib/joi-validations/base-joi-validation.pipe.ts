@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ObjectSchema } from 'joi';
 import { ArgumentMetadata, HttpStatus, PipeTransform } from '@nestjs/common';
 import { ValidateFailedException } from '../exceptions';
@@ -37,14 +38,23 @@ export abstract class BaseJoiValidationPipe<T = any, R = any>
     });
 
     if (error) {
-      throw new ValidateFailedException(
+      const validateFailedException = new ValidateFailedException(
         this.errorMessage(),
         this.errorCode(),
         HttpStatus.BAD_REQUEST,
         buildMessageValidationApollo(error, this.messages(), this.attributes()),
       );
+
+      this.onError(validateFailedException, data, metadata);
+      throw validateFailedException;
     }
 
     return this.transformResponse ? this.transformResponse(value, data) : value;
   }
+
+  protected onError(
+    error: ValidateFailedException,
+    data: T,
+    metadata: ArgumentMetadata,
+  ): void {}
 }
